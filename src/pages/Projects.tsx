@@ -16,43 +16,47 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    name: "Test 1",
-    type: "Web App",
+    name: "ZulassungsstelleBot",
+    type: "Automation",
     description:
-      "This is a detailed description for Test Project 1. It showcases the layout and formatting of the project preview area.",
-    tech: ["React", "TypeScript", "Tailwind"],
-    status: "Done",
-    size: "1.2kb",
+      "A bot designed to automatically monitor and book available time slots at the local vehicle registration office (Zulassungsstelle). It polls the appointment system and secures slots faster than manual interaction.",
+    tech: ["Go", "Web Scraping", "Automation"],
+    status: "Active",
+    size: "1.2mb",
+    // image: ''
   },
   {
     id: 2,
-    name: "Test 2",
-    type: "CLI Tool",
+    name: "mortalityClock",
+    type: "Web App",
     description:
-      "This is a detailed description for Test Project 2. It demonstrates how different projects look when selected in the list.",
-    tech: ["Rust", "Clap"],
-    status: "Active",
-    size: "0.8kb",
+      'A minimalist "Memento Mori" visualization that displays your current age as a high-precision floating-point number. It serves as a constant, real-time reminder of the passage of time, encouraging focus and productivity.',
+    tech: ["HTML", "CSS", "JavaScript"],
+    status: "Completed",
+    size: "142kb",
+    // image: ''
   },
   {
     id: 3,
-    name: "Test 3",
-    type: "API",
+    name: "Dotfiles & Configs",
+    type: "System",
     description:
-      "This is a detailed description for Test Project 3. You can see how the technology hashtags and metadata are displayed.",
-    tech: ["Node.js", "Express", "PostgreSQL"],
-    status: "In Progress",
-    size: "2.5kb",
+      "A consolidated collection of my personal development environment configurations. Includes setups for Neovim (Lua), Kitty Terminal, and AeroSpace window manager, optimized for a keyboard-centric workflow on macOS.",
+    tech: ["Lua", "Shell", "TOML", "Vim Script"],
+    status: "Maintained",
+    size: "8.4mb",
+    // image: ''
   },
   {
     id: 4,
-    name: "Test 4",
-    type: "Mobile",
+    name: "TodoList",
+    type: "Web Utility",
     description:
-      "This is a detailed description for Test Project 4. Use this as a template to fill in your real project information later.",
-    tech: ["Flutter", "Dart"],
-    status: "Alpha",
-    size: "5.1kb",
+      "A clean and efficient task management application. Built to track daily tasks with a focus on simplicity and user experience.",
+    tech: ["JavaScript", "Web"],
+    status: "Archived",
+    size: "450kb",
+    // image: ''
   },
 ];
 
@@ -125,7 +129,7 @@ export function Projects() {
                       key={proj.id}
                       className={`px-4 py-2 flex justify-between items-center cursor-pointer transition-all duration-200 ${
                         isSelected
-                          ? "bg-cat-surface0 text-cat-mauve font-bold"
+                          ? "bg-cat-surface0 text-cat-mauve font-bold translate-x-1"
                           : "hover:bg-cat-surface0/20 text-cat-text opacity-70"
                       }`}
                       onClick={() => setSelectedIndex(index)}
@@ -203,6 +207,7 @@ export function Projects() {
             </div>
           </div>
 
+          {/* Statusbar */}
           <div className="h-6 flex items-center px-4 text-[11px] bg-cat-surface0/30 border-l border-r border-b border-cat-surface0 rounded-b-sm">
             <div className="text-cat-green font-bold mr-4">EXPLORE</div>
             <div className="flex-1 truncate opacity-70">
