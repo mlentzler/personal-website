@@ -82,7 +82,7 @@ export const Navigation: React.FC<{ startTrigger: boolean }> = ({ startTrigger }
                 onClick={allItemsFinished ? item.action : undefined}
                 onMouseEnter={() => allItemsFinished && setSelectedIndex(index)}
                 className={`cursor-pointer flex items-center transition-all duration-200 ${
-                  isSelected && allItemsFinished ? 'text-cat-mauve' : 'text-cat-text opacity-70'
+                  isSelected && allItemsFinished ? 'text-cat-mauve translate-x-2' : 'text-cat-text opacity-70'
                 }`}
               >
                 <span className="mr-3 font-bold w-8">
