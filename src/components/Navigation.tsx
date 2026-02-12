@@ -10,10 +10,10 @@ export const Navigation: React.FC<{ startTrigger: boolean }> = ({ startTrigger }
 
   const items = useMemo(() => [
     { id: 'projects', label: 'Projects', action: () => console.log('Navigate to projects') },
-    { id: 'about', label: 'About Me', action: () => console.log('Navigate to about') },
+    { id: 'about', label: 'About Me', action: () => navigate('/about') },
     { id: 'contact', label: 'Contact', action: () => window.location.href = 'mailto:michel@lentzler.com' },
     { id: 'github', label: 'GitHub', action: () => window.open('https://github.com/mlentzler', '_blank') },
-  ], []);
+  ], [navigate]);
 
   const allItemsFinished = visibleItemsCount >= items.length;
 
