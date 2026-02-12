@@ -8,12 +8,21 @@
   --color-cat-mantle: #181825;
   --color-cat-crust: #11111b;
   --color-cat-text: #cdd6f4;
+  --color-cat-subtext0: #a6adc8;
   --color-cat-overlay0: #6c7086;
   --color-cat-surface0: #313244;
+  --color-cat-surface1: #45475a;
   --color-cat-mauve: #cba6f7;
   --color-cat-red: #f38ba8;
+  --color-cat-maroon: #eba0ac;
+  --color-cat-peach: #fab387;
   --color-cat-yellow: #f9e2af;
   --color-cat-green: #a6e3a1;
+  --color-cat-teal: #94e2d5;
+  --color-cat-sky: #89dceb;
+  --color-cat-sapphire: #74c7ec;
+  --color-cat-blue: #89b4fa;
+  --color-cat-lavender: #b4befe;
 }
 
 :root {
