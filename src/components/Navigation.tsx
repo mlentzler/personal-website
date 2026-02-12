@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typewriter } from './Typewriter';
 
@@ -8,12 +8,12 @@ export const Navigation: React.FC<{ startTrigger: boolean }> = ({ startTrigger }
   const [visibleItemsCount, setVisibleItemsCount] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const items = [
+  const items = useMemo(() => [
     { id: 'projects', label: 'Projects', action: () => console.log('Navigate to projects') },
     { id: 'about', label: 'About Me', action: () => console.log('Navigate to about') },
     { id: 'contact', label: 'Contact', action: () => window.location.href = 'mailto:michel@lentzler.com' },
     { id: 'github', label: 'GitHub', action: () => window.open('https://github.com/mlentzler', '_blank') },
-  ];
+  ], []);
 
   const allItemsFinished = visibleItemsCount >= items.length;
 
