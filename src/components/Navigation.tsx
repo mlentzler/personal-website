@@ -51,6 +51,7 @@ export const Navigation: React.FC<{ startTrigger: boolean }> = ({ startTrigger }
         lines={[{ text: "SELECT AN OPTION:", className: "text-cat-overlay0 text-sm mb-4 tracking-widest" }]}
         speed={30}
         onComplete={() => setHeaderFinished(true)}
+        hideCursorOnComplete={true}
       />
       
       {headerFinished && (
@@ -69,6 +70,7 @@ export const Navigation: React.FC<{ startTrigger: boolean }> = ({ startTrigger }
                     lines={[{ text: `[ ] ${item.label}`, className: "" }]}
                     speed={40}
                     onComplete={() => setVisibleItemsCount(prev => prev + 1)}
+                    hideCursorOnComplete={true}
                   />
                 </li>
               );

@@ -11,12 +11,14 @@ interface TypewriterProps {
   lines: TypewriterLine[];
   containerClassName?: string;
   onComplete?: () => void;
+  hideCursorOnComplete?: boolean;
 }
 
 export const Typewriter: React.FC<TypewriterProps> = ({
   lines,
   containerClassName = "",
   onComplete,
+  hideCursorOnComplete = false,
 }) => {
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
@@ -24,9 +26,11 @@ export const Typewriter: React.FC<TypewriterProps> = ({
     Array<{ text: string; className: string }>
   >([]);
   const [hasCalledComplete, setHasCalledComplete] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
     if (currentLineIndex >= lines.length) {
+      if (!isFinished) setIsFinished(true);
       if (onComplete && !hasCalledComplete) {
         onComplete();
         setHasCalledComplete(true);
@@ -58,12 +62,15 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       return () => clearTimeout(timeout);
     } else {
       // Letzte Zeile ist fertig
+      if (!isFinished) setIsFinished(true);
       if (onComplete && !hasCalledComplete) {
         onComplete();
         setHasCalledComplete(true);
       }
     }
-  }, [displayedText, currentLineIndex, lines, onComplete, hasCalledComplete]);
+  }, [displayedText, currentLineIndex, lines, onComplete, hasCalledComplete, isFinished]);
+
+  const showCursor = !hideCursorOnComplete || !isFinished;
 
   return (
     <div className={`font-mono ${containerClassName}`}>
@@ -76,7 +83,9 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       {currentLineIndex < lines.length && (
         <div className={lines[currentLineIndex].className}>
           <span>{displayedText}</span>
-          <span className="inline-block w-2 h-5 ml-1 bg-cat-mauve align-middle animate-cursor -translate-y-[2px]" />
+          {showCursor && (
+            <span className="inline-block w-2 h-5 ml-1 bg-cat-mauve align-middle animate-cursor -translate-y-[2px]" />
+          )}
         </div>
       )}
     </div>
