@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface TypewriterLine {
   text: string;
@@ -12,6 +12,7 @@ interface TypewriterProps {
   containerClassName?: string;
   onComplete?: () => void;
   hideCursorOnComplete?: boolean;
+  speed?: number;
 }
 
 export const Typewriter: React.FC<TypewriterProps> = ({
@@ -19,31 +20,38 @@ export const Typewriter: React.FC<TypewriterProps> = ({
   containerClassName = "",
   onComplete,
   hideCursorOnComplete = false,
+  speed: defaultSpeed = 50,
 }) => {
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [completedLines, setCompletedLines] = useState<
     Array<{ text: string; className: string }>
   >([]);
-  const [hasCalledComplete, setHasCalledComplete] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const hasCalledComplete = useRef(false);
 
   useEffect(() => {
     if (currentLineIndex >= lines.length) {
-      if (!isFinished) setIsFinished(true);
-      if (onComplete && !hasCalledComplete) {
-        onComplete();
-        setHasCalledComplete(true);
+      if (!isFinished) {
+        const t = setTimeout(() => setIsFinished(true), 0);
+        return () => clearTimeout(t);
+      }
+
+      if (onComplete && !hasCalledComplete.current) {
+        hasCalledComplete.current = true;
+        const t = setTimeout(() => onComplete(), 0);
+        return () => clearTimeout(t);
       }
       return;
     }
 
     const currentLine = lines[currentLineIndex];
+    const typingSpeed = currentLine.speed || defaultSpeed;
 
     if (displayedText.length < currentLine.text.length) {
       const timeout = setTimeout(() => {
         setDisplayedText(currentLine.text.slice(0, displayedText.length + 1));
-      }, currentLine.speed || 50);
+      }, typingSpeed);
       return () => clearTimeout(timeout);
     } else if (currentLineIndex < lines.length - 1) {
       const waitTime =
@@ -51,24 +59,32 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       const timeout = setTimeout(() => {
         setCompletedLines((prev) => [
           ...prev,
-          {
-            text: currentLine.text,
-            className: currentLine.className || "",
-          },
+          { text: currentLine.text, className: currentLine.className || "" },
         ]);
         setDisplayedText("");
         setCurrentLineIndex((prev) => prev + 1);
       }, waitTime);
       return () => clearTimeout(timeout);
     } else {
-      // Letzte Zeile ist fertig
-      if (!isFinished) setIsFinished(true);
-      if (onComplete && !hasCalledComplete) {
-        onComplete();
-        setHasCalledComplete(true);
+      //Last line finished
+      if (!isFinished) {
+        const t = setTimeout(() => setIsFinished(true), 0);
+        return () => clearTimeout(t);
+      }
+      if (onComplete && !hasCalledComplete.current) {
+        hasCalledComplete.current = true;
+        const t = setTimeout(() => onComplete(), 0);
+        return () => clearTimeout(t);
       }
     }
-  }, [displayedText, currentLineIndex, lines, onComplete, hasCalledComplete, isFinished]);
+  }, [
+    displayedText,
+    currentLineIndex,
+    lines,
+    onComplete,
+    isFinished,
+    defaultSpeed,
+  ]);
 
   const showCursor = !hideCursorOnComplete || !isFinished;
 
