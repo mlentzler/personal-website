@@ -1,7 +1,9 @@
+import { BrowserRouter } from "react-router-dom";
 import { TerminalWindow } from "./components/TerminalWindow";
 import { Typewriter } from "./components/Typewriter";
+import { Navigation } from "./components/Navigation";
 
-function App() {
+function AppContent() {
   return (
     <TerminalWindow>
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto text-center mt-20">
@@ -21,8 +23,17 @@ function App() {
             }
           ]}
         />
+        <Navigation showDelay={4500} />
       </div>
     </TerminalWindow>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
