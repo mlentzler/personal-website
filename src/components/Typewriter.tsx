@@ -10,20 +10,29 @@ interface TypewriterLine {
 interface TypewriterProps {
   lines: TypewriterLine[];
   containerClassName?: string;
+  onComplete?: () => void;
 }
 
 export const Typewriter: React.FC<TypewriterProps> = ({
   lines,
   containerClassName = "",
+  onComplete,
 }) => {
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [completedLines, setCompletedLines] = useState<
     Array<{ text: string; className: string }>
   >([]);
+  const [hasCalledComplete, setHasCalledComplete] = useState(false);
 
   useEffect(() => {
-    if (currentLineIndex >= lines.length) return;
+    if (currentLineIndex >= lines.length) {
+      if (onComplete && !hasCalledComplete) {
+        onComplete();
+        setHasCalledComplete(true);
+      }
+      return;
+    }
 
     const currentLine = lines[currentLineIndex];
 
@@ -33,7 +42,6 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       }, currentLine.speed || 50);
       return () => clearTimeout(timeout);
     } else if (currentLineIndex < lines.length - 1) {
-      // if more then one line, wait and start typing again
       const waitTime =
         currentLine.delayAfter !== undefined ? currentLine.delayAfter : 500;
       const timeout = setTimeout(() => {
@@ -48,19 +56,23 @@ export const Typewriter: React.FC<TypewriterProps> = ({
         setCurrentLineIndex((prev) => prev + 1);
       }, waitTime);
       return () => clearTimeout(timeout);
+    } else {
+      // Letzte Zeile ist fertig
+      if (onComplete && !hasCalledComplete) {
+        onComplete();
+        setHasCalledComplete(true);
+      }
     }
-  }, [displayedText, currentLineIndex, lines]);
+  }, [displayedText, currentLineIndex, lines, onComplete, hasCalledComplete]);
 
   return (
     <div className={`font-mono ${containerClassName}`}>
-      {/* Finished lines */}
       {completedLines.map((line, idx) => (
         <div key={idx} className={line.className}>
           {line.text}
         </div>
       ))}
 
-      {/* Current or last lines */}
       {currentLineIndex < lines.length && (
         <div className={lines[currentLineIndex].className}>
           <span>{displayedText}</span>

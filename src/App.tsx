@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { TerminalWindow } from "./components/TerminalWindow";
 import { Typewriter } from "./components/Typewriter";
 import { Navigation } from "./components/Navigation";
 
 function AppContent() {
+  const [introFinished, setIntroFinished] = useState(false);
+
   return (
     <TerminalWindow>
-      <div className="flex flex-col items-center w-full max-w-4xl mx-auto text-center mt-20">
+      <div className="flex flex-col items-center w-full max-w-4xl mx-auto mt-20">
         <Typewriter 
           lines={[
             { 
@@ -22,8 +25,9 @@ function AppContent() {
               delayAfter: 500
             }
           ]}
+          onComplete={() => setIntroFinished(true)}
         />
-        <Navigation showDelay={4500} />
+        <Navigation startTrigger={introFinished} />
       </div>
     </TerminalWindow>
   );
