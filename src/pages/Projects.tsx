@@ -10,7 +10,8 @@ interface Project {
   tech: string[];
   status: string;
   size: string;
-  url: string;
+  githubUrl?: string;
+  liveUrl?: string;
   image?: string;
 }
 
@@ -24,10 +25,21 @@ const projects: Project[] = [
     tech: ["Go", "Web Scraping", "Automation"],
     status: "Active",
     size: "1.2mb",
-    url: "https://github.com/mlentzler/ZulassungsstelleBot",
+    githubUrl: "https://github.com/mlentzler/ZulassungsstelleBot",
   },
   {
     id: 2,
+    name: "MyRestaurantList",
+    type: "Fullstack App",
+    description:
+      "A mobile-first web application for food enthusiasts to track restaurant visits, rate specific dishes, and manage a culinary wishlist. The application is self-hosted within a Docker container on a Raspberry Pi and is made securely accessible to the public via a Cloudflare tunnel.",
+    tech: ["React", "Node.js", "SQLite", "Docker", "Cloudflare"],
+    status: "Released",
+    size: "15.2mb",
+    liveUrl: "https://myrestaurantlist.app",
+  },
+  {
+    id: 3,
     name: "mortalityClock",
     type: "Web App",
     description:
@@ -35,10 +47,11 @@ const projects: Project[] = [
     tech: ["HTML", "CSS", "JavaScript"],
     status: "Completed",
     size: "142kb",
-    url: "https://github.com/mlentzler/mortalityClock",
+    githubUrl: "https://github.com/mlentzler/mortalityClock",
+    liveUrl: "https://mortalityclock.lentzler.com",
   },
   {
-    id: 3,
+    id: 4,
     name: "Dotfiles & Configs",
     type: "System",
     description:
@@ -46,10 +59,10 @@ const projects: Project[] = [
     tech: ["Lua", "Shell", "TOML", "Vim Script"],
     status: "Maintained",
     size: "8.4mb",
-    url: "https://github.com/mlentzler/neovim-config",
+    githubUrl: "https://github.com/mlentzler/neovim-config",
   },
   {
-    id: 4,
+    id: 5,
     name: "TodoList",
     type: "Web Utility",
     description:
@@ -57,7 +70,7 @@ const projects: Project[] = [
     tech: ["JavaScript", "Web"],
     status: "Archived",
     size: "450kb",
-    url: "https://github.com/mlentzler/TodoList",
+    githubUrl: "https://github.com/mlentzler/TodoList",
   },
 ];
 
@@ -81,7 +94,9 @@ export function Projects() {
           break;
         case "Enter":
           if (introFinished) {
-            window.open(projects[selectedIndex].url, "_blank");
+            const p = projects[selectedIndex];
+            if (p.liveUrl) window.open(p.liveUrl, "_blank");
+            else if (p.githubUrl) window.open(p.githubUrl, "_blank");
           }
           break;
         case "Backspace":
@@ -142,7 +157,7 @@ export function Projects() {
                       onClick={() => setSelectedIndex(index)}
                     >
                       <div className="flex items-center">
-                        <span className="mr-3 font-bold w-8">
+                        <span className="mr-3 font-bold w-8 text-center">
                           {isSelected ? "[x]" : "[ ]"}
                         </span>
                         <span>{proj.name}</span>
@@ -156,36 +171,63 @@ export function Projects() {
               </div>
             </div>
 
+            {/* Structured Preview Area */}
             <div className="w-3/5 bg-cat-base p-8 overflow-y-auto scrollbar-thin scrollbar-thumb-cat-surface1 scrollbar-track-transparent">
-              <div className="mb-6 flex justify-between items-start gap-4">
-                <div className="flex-1">
-                  <div className="text-cat-overlay0 text-[10px] mb-1 uppercase tracking-widest underline decoration-cat-surface1 underline-offset-4 decoration-1">
-                    Project Name:
+              {/* 1. Project Name & Header Buttons */}
+              <div className="mb-6">
+                <div className="flex justify-between items-end gap-4 mb-4">
+                  <div className="flex-1">
+                    <div className="text-cat-overlay0 text-[10px] mb-1 uppercase tracking-widest underline decoration-cat-surface1 underline-offset-4 decoration-1">
+                      Project Name:
+                    </div>
+                    <h2 className="text-2xl font-bold text-cat-green uppercase tracking-tight break-all leading-tight">
+                      {selectedProject.name}
+                    </h2>
                   </div>
-                  <h2 className="text-2xl font-bold text-cat-green uppercase tracking-tight break-all">
-                    {selectedProject.name}
-                  </h2>
+
+                  {/* Button Container (Alighed to the right) */}
+                  <div className="flex gap-3 shrink-0 pb-1">
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-cat-blue hover:text-cat-mauve transition-all group border border-cat-surface0 px-3 py-1.5 rounded-sm bg-cat-mantle/30 hover:bg-cat-surface0/50"
+                      >
+                        <svg
+                          className="w-4 h-4 mr-2 fill-current"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                        </svg>
+                        <span className="text-[10px] font-bold uppercase tracking-widest group-hover:underline">
+                          Visit
+                        </span>
+                      </a>
+                    )}
+
+                    {selectedProject.githubUrl && (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-cat-mauve hover:text-cat-text transition-all group border border-cat-mauve/50 px-3 py-1.5 rounded-sm bg-cat-mauve/5 hover:bg-cat-mauve/20"
+                      >
+                        <svg
+                          className="w-4 h-4 mr-2 fill-current"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        <span className="text-[10px] font-bold uppercase tracking-widest group-hover:underline">
+                          GitHub
+                        </span>
+                      </a>
+                    )}
+                  </div>
                 </div>
-
-                <a
-                  href={selectedProject.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 flex items-center text-cat-blue hover:text-cat-mauve transition-all group border border-cat-surface0 px-3 py-1.5 rounded-sm bg-cat-mantle/30 hover:bg-cat-surface0/50 shrink-0"
-                >
-                  <svg
-                    className="w-4 h-4 mr-2 fill-current"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                  <span className="text-[10px] font-bold uppercase tracking-widest group-hover:underline">
-                    View on GitHub
-                  </span>
-                </a>
+                <div className="h-px w-full bg-cat-surface0 mb-8"></div>
               </div>
-
-              <div className="h-px w-full bg-cat-surface0 mb-8"></div>
 
               {/* 2. Technologies */}
               <div className="mb-8">
