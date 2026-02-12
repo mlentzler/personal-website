@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typewriter } from "../components/Typewriter";
 
@@ -23,7 +23,6 @@ const projects: Project[] = [
     tech: ["Go", "Web Scraping", "Automation"],
     status: "Active",
     size: "1.2mb",
-    // image: ''
   },
   {
     id: 2,
@@ -34,7 +33,6 @@ const projects: Project[] = [
     tech: ["HTML", "CSS", "JavaScript"],
     status: "Completed",
     size: "142kb",
-    // image: ''
   },
   {
     id: 3,
@@ -45,7 +43,6 @@ const projects: Project[] = [
     tech: ["Lua", "Shell", "TOML", "Vim Script"],
     status: "Maintained",
     size: "8.4mb",
-    // image: ''
   },
   {
     id: 4,
@@ -56,7 +53,6 @@ const projects: Project[] = [
     tech: ["JavaScript", "Web"],
     status: "Archived",
     size: "450kb",
-    // image: ''
   },
 ];
 
@@ -81,6 +77,7 @@ export function Projects() {
         case "Backspace":
         case "Escape":
         case "q":
+        case "b":
           navigate("/");
           break;
         default:
@@ -114,7 +111,7 @@ export function Projects() {
       </div>
 
       {introFinished && (
-        <div className="flex-1 flex flex-col overflow-hidden animate-in fade-in duration-300 px-4 pb-8">
+        <div className="flex-1 flex flex-col overflow-hidden animate-in fade-in duration-300 px-4 pb-4">
           <div className="flex-1 flex border border-cat-surface0 overflow-hidden rounded-sm">
             {/* Sidebar */}
             <div className="w-2/5 border-r border-cat-surface0 p-0 flex flex-col bg-cat-mantle/10 shrink-0">
@@ -129,7 +126,7 @@ export function Projects() {
                       key={proj.id}
                       className={`px-4 py-2 flex justify-between items-center cursor-pointer transition-all duration-200 ${
                         isSelected
-                          ? "bg-cat-surface0 text-cat-mauve font-bold translate-x-1"
+                          ? "bg-cat-surface0 text-cat-mauve font-bold"
                           : "hover:bg-cat-surface0/20 text-cat-text opacity-70"
                       }`}
                       onClick={() => setSelectedIndex(index)}
@@ -215,15 +212,26 @@ export function Projects() {
               {selectedProject.name}
             </div>
             <div className="flex gap-4 opacity-70">
-              <span className="text-cat-blue font-bold tracking-tighter uppercase">
+              <span className="text-cat-blue font-bold tracking-tighter uppercase text-[10px]">
                 Mode: Detailed View
               </span>
             </div>
           </div>
 
-          <div className="mt-4 text-[10px] text-cat-overlay0 italic flex justify-between px-2">
-            <span>j/k: navigate • q: back • scroll: enabled</span>
-            <span>~/lentzler.com/projects</span>
+          <div className="mt-4 flex justify-between items-center px-2">
+            <button
+              onClick={() => navigate("/")}
+              className="group flex items-center text-cat-mauve hover:text-cat-green transition-colors font-mono cursor-pointer"
+            >
+              <span className="mr-2">[</span>
+              <span className="group-hover:underline text-[10px] uppercase tracking-widest">
+                Back to Menu
+              </span>
+              <span className="ml-2">]</span>
+            </button>
+            <div className="text-[10px] text-cat-overlay0 italic">
+              j/k: navigate • q: back • scroll: enabled
+            </div>
           </div>
         </div>
       )}
