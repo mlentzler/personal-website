@@ -33,7 +33,7 @@ export const Navigation: React.FC<NavigationProps> = ({
       {
         id: "projects",
         label: "Projects",
-        action: () => console.log("Navigate to projects"),
+        action: () => navigate("/projects"),
       },
       { id: "about", label: "About Me", action: () => navigate("/about") },
       {
