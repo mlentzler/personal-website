@@ -1,13 +1,21 @@
 import { TerminalWindow } from "./components/TerminalWindow";
+import { Typewriter } from "./components/Typewriter";
 
 function App() {
   return (
     <TerminalWindow>
-      <div className="flex flex-col items-center justify-center h-full max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl font-bold text-cat-mauve mb-4">
-          {">"} Welcome to lentzler.com...
-        </h1>
-        <p className="text-cat-mauve">Terminal border done right???</p>
+      <div className="flex flex-col items-center w-full max-w-4xl mx-auto text-center mt-20">
+        <Typewriter 
+          text="Hello, Welcome to Lentzler.com"
+          className="text-4xl font-bold text-cat-mauve mb-2"
+          speed={70}
+        />
+        <Typewriter 
+          text="The personal website of Michel Lentzler"
+          className="text-xl text-cat-text"
+          speed={50}
+          delay={2500}
+        />
       </div>
     </TerminalWindow>
   );
