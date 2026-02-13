@@ -109,12 +109,12 @@ export const Navigation: React.FC<NavigationProps> = ({
   if (!startTrigger && !skipAnimation) return null;
 
   return (
-    <div className="mt-12 w-full max-w-xs text-left px-4">
+    <div className="mt-12 w-full max-w-xs text-left">
       {!skipAnimation ? (
         <Typewriter
           lines={[
             {
-              text: "SELECT AN OPTION:",
+              segments: [{ text: "SELECT AN OPTION:" }],
               className: "text-cat-overlay0 text-sm mb-4 tracking-widest",
             },
           ]}
@@ -147,7 +147,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                       : "text-cat-text opacity-70"
                   }`}
                 >
-                  <span className="mr-3 font-bold w-8">
+                  <span className="mr-3 font-bold w-8 text-center">
                     {isSelected ? "[x]" : "[ ]"}
                   </span>
                   <span
@@ -168,7 +168,12 @@ export const Navigation: React.FC<NavigationProps> = ({
                   className="flex items-center text-cat-text opacity-70"
                 >
                   <Typewriter
-                    lines={[{ text: `[ ] ${item.label}`, className: "" }]}
+                    lines={[
+                      {
+                        segments: [{ text: `[ ] ${item.label}` }],
+                        className: "",
+                      },
+                    ]}
                     speed={40}
                     onComplete={handleItemComplete}
                     hideCursorOnComplete={true}
@@ -188,7 +193,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                     : "text-cat-text opacity-70"
                 }`}
               >
-                <span className="mr-3 font-bold w-8">
+                <span className="mr-3 font-bold w-8 text-center">
                   {isSelected && allItemsFinished ? "[x]" : "[ ]"}
                 </span>
                 <span
