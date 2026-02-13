@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# lentzler.com 🖥️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist, TUI-inspired (Terminal User Interface) personal portfolio website. Built with focus on speed, accessibility, and a keyboard-centric workflow.
 
-Currently, two official plugins are available:
+Live at: [https://lentzler.com](https://lentzler.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **TUI Aesthetic:** A terminal-themed interface featuring the [Catppuccin](https://catppuccin.com/) color scheme and [JetBrains Mono](https://www.jetbrains.com/lp/mono/) font.
+- **Dynamic Typewriter Engine:** Custom-built sequential animation system that handles text segments and highlights without risking security vulnerabilities (no `dangerouslySetInnerHTML`).
+- **Keyboard Navigation:** Fully navigable via keyboard:
+  - `j` / `k` or `↑` / `↓` to browse menus and projects.
+  - `Enter` to select or open links.
+  - `b` / `Backspace` / `Esc` / `q` to go back.
+- **Interactive Project Explorer:** A `yazi`/`ranger` inspired project manager with a two-column layout, metadata tracking, and visual previews.
+- **Responsive Design:** Mobile-optimized view that transitions from a split-pane layout to a full-screen focused detail view on smaller devices.
+- **Automated Deployment:** CI/CD pipeline via GitHub Actions, deployed to GitHub Pages with custom domain support.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Framework:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Routing:** [React Router 7](https://reactrouter.com/)
+- **Icons:** Custom SVGs
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Local Development
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Clone the repository:**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   ```bash
+   git clone https://github.com/mlentzler/personal-website.git
+   cd personal-website
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/      # Reusable UI components (TerminalWindow, Typewriter, etc.)
+├── pages/           # Page-level components (Home, About, Projects)
+├── assets/          # Static assets
+└── index.css        # Global styles & Tailwind 4 theme configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Designed and developed by Michel Lentzler. 2026.
