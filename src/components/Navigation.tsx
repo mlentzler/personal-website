@@ -46,6 +46,12 @@ export const Navigation: React.FC<NavigationProps> = ({
         label: "GitHub",
         action: () => window.open("https://github.com/mlentzler", "_blank"),
       },
+      {
+        id: "linkedin",
+        label: "LinkedIn",
+        action: () =>
+          window.open("https://www.linkedin.com/in/michel-lentzler", "_blank"),
+      },
     ],
     [navigate],
   );
