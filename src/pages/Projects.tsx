@@ -39,12 +39,21 @@ Under the hood, the bot utilizes <a href='https://github.com/chromedp/chromedp' 
   { 
     id: 2, 
     name: 'MyRestaurantList', 
-    type: 'Fullstack App', 
-    description: 'A mobile-first web application for food enthusiasts to track restaurant visits, rate specific dishes, and manage a culinary wishlist. The application is self-hosted within a Docker container on a Raspberry Pi and is made securely accessible to the public via a Cloudflare tunnel.', 
-    tech: ['React', 'Node.js', 'SQLite', 'Docker', 'Cloudflare'], 
+    type: 'Fullstack & Social', 
+    description: `A mobile-first fullstack application inspired by the tracking logic of <span class='text-cat-mauve font-bold'>MyAnimeList</span>, built to catalog and rank culinary experiences.
+
+The project was born out of a practical need: after visiting every ramen restaurant in Hamburg with my girlfriend, we realized we had lost track of which one actually served the best bowl. I developed this app to provide a definitive, shared record of our food adventures and to ensure no great meal is ever forgotten.
+
+<span class='text-cat-mauve font-bold'>Collaborative Groups:</span>
+Tailored for couples and friend groups, the <span class='text-cat-mauve'>Social Group Engine</span> allows users to maintain synchronized lists via unique join codes. This enables shared reviews, dish-specific ratings (Like/Dislike), and collective wishlist management.
+
+<span class='text-cat-mauve font-bold'>Technical Stack & Security:</span>
+The app implements secure <span class='text-cat-mauve'>JWT</span> authentication with <span class='text-cat-peach'>bcrypt</span> hashing. For privacy and control, the entire system is <span class='text-cat-mauve'>Dockerized</span> and self-hosted on a local <span class='text-cat-peach'>Raspberry Pi</span>, exposed to the web via a secure <span class='text-cat-peach'>Cloudflare Tunnel</span>.`, 
+    tech: ['React', 'Node.js', 'SQLite', 'Docker', 'JWT', 'Cloudflare'], 
     status: 'Released', 
     size: '15.2mb',
-    liveUrl: 'https://restaurantlist.app'
+    liveUrl: 'https://myrestaurantlist.app',
+    image: './myrestaurantlist_demo.gif'
   },
   { 
     id: 3, 
@@ -226,11 +235,11 @@ export function Projects() {
                 </div>
               </div>
 
-              {/* 4. UI Preview (Optional Image/GIF) */}
+              {/* 4. UI Preview */}
               {selectedProject.image && (
                 <div className="mt-8 animate-in fade-in duration-700">
                   <div className="text-cat-overlay0 text-[10px] mb-3 uppercase tracking-widest underline decoration-cat-surface1 underline-offset-4 decoration-1">UI Preview:</div>
-                  <div className="border border-cat-surface0 rounded-sm overflow-hidden bg-cat-crust/50 group shadow-lg max-w-2xl">
+                  <div className={`border border-cat-surface0 rounded-sm overflow-hidden bg-cat-crust/50 group shadow-lg ${selectedProject.name === 'MyRestaurantList' ? 'max-w-[300px]' : 'max-w-2xl'}`}>
                     <img 
                       src={selectedProject.image} 
                       alt={selectedProject.name} 
