@@ -59,12 +59,21 @@ The app implements secure <span class='text-cat-mauve'>JWT</span> authentication
     id: 3, 
     name: 'mortalityClock', 
     type: 'Web App', 
-    description: 'A minimalist "Memento Mori" visualization that displays your current age as a high-precision floating-point number. It serves as a constant, real-time reminder of the passage of time, encouraging focus and productivity.', 
-    tech: ['HTML', 'CSS', 'JavaScript'], 
+    description: `A minimalist <span class='text-cat-mauve font-bold'>"Memento Mori"</span> productivity tool designed to visualize the relentless passage of time.
+
+The project was inspired by the <a href='https://github.com/alphabt/mortality' target='_blank' rel='noopener noreferrer' class='text-cat-mauve underline hover:text-cat-peach transition-colors'>Mortality Chrome Plugin</a>. Upon realizing that no such native tool existed for Safari, I developed this browser-independent web application. It is intended to be set as a <span class='text-cat-mauve font-bold'>homepage</span>, providing a visceral reminder of life's brevity every time a new browsing session begins.
+
+<span class='text-cat-mauve font-bold'>High-Precision Visualization:</span>
+The core engine calculates the user's age with extreme precision, displaying it as a <span class='text-cat-peach'>9-decimal floating-point number</span>. By updating the state every 100ms, the app creates a "ticking" effect that serves as a real-time reminder of time's movement.
+
+<span class='text-cat-mauve font-bold'>Technical Implementation:</span>
+Built with React, the application utilizes <span class='text-cat-peach'>localStorage</span> to persist birth data and theme preferences locally. The logic accounts for leap years (<span class='text-cat-peach'>365.25 days</span>) to maintain accuracy over long durations and respects the user's system dark/light mode settings.`, 
+    tech: ['React', 'JavaScript', 'CSS', 'LocalStorage', 'Temporal Logic'], 
     status: 'Completed', 
     size: '142kb',
     githubUrl: 'https://github.com/mlentzler/mortalityClock',
-    liveUrl: 'https://mortalityclock.lentzler.com'
+    liveUrl: 'https://mortalityclock.lentzler.com',
+    image: './mortalityClock_demo.gif'
   },
   { 
     id: 4, 
