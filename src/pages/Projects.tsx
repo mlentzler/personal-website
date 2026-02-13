@@ -79,9 +79,25 @@ Built with React, the application utilizes <span class='text-cat-peach'>localSto
     id: 4,
     name: "Dotfiles & Configs",
     type: "System",
-    description:
-      "A consolidated collection of my personal development environment configurations. Includes setups for Neovim (Lua), Kitty Terminal, and AeroSpace window manager, optimized for a keyboard-centric workflow on macOS.",
-    tech: ["Lua", "Shell", "TOML", "Vim Script"],
+    description: `A configuration that transforms macOS into a keyboard-centric power user environment.
+
+<span class='text-cat-mauve font-bold'>The Desktop Environment (AeroSpace & SketchyBar):</span>
+I utilize <a href='https://github.com/mlentzler/AeroSpace-config' target='_blank' rel='noopener noreferrer' class='text-cat-mauve underline hover:text-cat-peach transition-colors'>AeroSpace</a> as my tiling window manager, optimized for a German QWERTZ layout. It is deeply integrated with <a href='https://github.com/mlentzler/sketchyBar-config' target='_blank' rel='noopener noreferrer' class='text-cat-mauve underline hover:text-cat-peach transition-colors'>SketchyBar</a>, which serves as a highly customizable status bar that dynamically displays my active AeroSpace workspaces and system metrics. This synergy creates a cohesive UI that respects the <span class='text-cat-peach font-bold'>Catppuccin</span> design language and utilizes <span class='text-cat-peach'>JankyBorders</span> for active focus highlighting.
+
+<span class='text-cat-mauve font-bold'>The Editor (Neovim):</span>
+My <a href='https://github.com/mlentzler/neovim-config' target='_blank' rel='noopener noreferrer' class='text-cat-mauve underline hover:text-cat-peach transition-colors'>Neovim</a> setup is a fully-fledged IDE replacement built entirely in Lua. It relies on <span class='text-cat-peach'>lazy.nvim</span> for blazing fast startup times and modular plugin management, organized under \`lua/michel\` for maintainability.
+
+<span class='text-cat-mauve font-bold'>The Terminal (Kitty):</span>
+The terminal foundation is provided by <a href='https://github.com/mlentzler/kitty-config' target='_blank' rel='noopener noreferrer' class='text-cat-mauve underline hover:text-cat-peach transition-colors'>Kitty</a>, chosen for its GPU acceleration, low latency, and excellent font rendering, serving as the primary interface for my terminal-based workflow.`,
+    tech: [
+      "Lua",
+      "Shell",
+      "macOS",
+      "AeroSpace",
+      "Neovim",
+      "Kitty",
+      "SketchyBar",
+    ],
     status: "Maintained",
     size: "8.4mb",
     githubUrl: "https://github.com/mlentzler/neovim-config",
@@ -189,7 +205,7 @@ export function Projects() {
       {introFinished && (
         <div className="flex-1 flex flex-col overflow-hidden animate-in fade-in duration-300 px-0 md:px-4 pb-4">
           <div className="flex-1 flex border border-cat-surface0 overflow-hidden rounded-sm shadow-2xl relative">
-            {/* Sidebar (List View) */}
+            {/* Sidebar */}
             <div
               className={`${showMobileDetail ? "hidden md:flex" : "flex"} w-full md:w-80 border-r border-cat-surface0 p-0 flex flex-col bg-cat-mantle/10 shrink-0`}
             >
@@ -226,11 +242,11 @@ export function Projects() {
               </div>
             </div>
 
-            {/* Structured Preview Area (Detail View) */}
+            {/* Structured Preview Area */}
             <div
               className={`${showMobileDetail ? "flex" : "hidden md:flex"} flex-1 bg-cat-base flex flex-col overflow-hidden`}
             >
-              {/* Mobile Header with Back Button */}
+              {/* Mobile Header */}
               <div className="md:hidden flex items-center p-4 border-b border-cat-surface0 bg-cat-crust/30">
                 <button
                   onClick={() => setShowMobileDetail(false)}
