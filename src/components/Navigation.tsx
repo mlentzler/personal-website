@@ -215,7 +215,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             <div
               className={`mt-8 text-[10px] text-cat-overlay0 opacity-50 font-mono italic ${!skipAnimation ? "animate-in fade-in duration-700" : ""}`}
             >
-              Use [j/k] or [↑/↓] to navigate • [Enter] to select
+              Use [j/k] or [↑/↓] to navigate • [Enter] to select • [i] for Impressum
             </div>
           )}
         </ul>

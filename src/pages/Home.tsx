@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Typewriter } from "../components/Typewriter";
 import { Navigation } from "../components/Navigation";
+import { Link } from "react-router-dom"; // Import Link
 
 interface HomeProps {
   hasSeenIntro: boolean;
@@ -22,6 +23,13 @@ export function Home({ hasSeenIntro, onIntroComplete }: HomeProps) {
           The personal website of Michel Lentzler
         </div>
         <Navigation startTrigger={true} skipAnimation={true} />
+        <Link to="/impressum" className="impressum-link group flex items-center text-cat-subtext0 hover:text-cat-text transition-colors font-mono cursor-pointer">
+          <span className="mr-1">[</span>
+          <span className="group-hover:underline uppercase text-xs tracking-widest">
+            Impressum
+          </span>
+          <span className="ml-1">]</span>
+        </Link> {/* Impressum Link */}
       </div>
     );
   }
@@ -51,6 +59,13 @@ export function Home({ hasSeenIntro, onIntroComplete }: HomeProps) {
         skipAnimation={false} 
         onMenuComplete={onIntroComplete} 
       />
+      <Link to="/impressum" className="impressum-link group flex items-center text-cat-subtext0 hover:text-cat-text transition-colors font-mono cursor-pointer">
+        <span className="mr-1">[</span>
+        <span className="group-hover:underline uppercase text-xs tracking-widest">
+          Impressum
+        </span>
+        <span className="ml-1">]</span>
+      </Link> {/* Impressum Link */}
     </div>
   );
 }
